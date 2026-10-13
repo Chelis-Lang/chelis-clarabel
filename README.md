@@ -4,7 +4,7 @@
 `P`, `q`, `A`, `b`, a cone list, and explicit settings, then returns either
 `Solved` with primal, dual, slack, and diagnostics or `Stopped` with a status.
 
-The package requires Chelis 0.19.3. Its evaluator and compiled C paths use the
+The package requires Chelis 0.19.4. Its evaluator and compiled C paths use the
 native provider carried by that toolchain. The compiler admits the provider
 only for this package version and the exact `src/qp.ch` source. A modified
 package body runs as ordinary Chelis code and reports provider unavailability.
