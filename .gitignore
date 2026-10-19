@@ -3,3 +3,5 @@ reef.lock
 .reef-write.lock
 target/
 .venv/
+.*.reef-tmp-*
+.*.reef-backup-*
