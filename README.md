@@ -4,7 +4,7 @@
 `P`, `q`, `A`, `b`, a cone list, and explicit settings, then returns either
 `Solved` with primal, dual, slack, and diagnostics or `Stopped` with a status.
 
-The package requires Chelis 0.19.4. Its evaluator and compiled C paths use the
+The package requires Chelis 0.21.0. Its evaluator and compiled C paths use the
 native provider carried by that toolchain. The compiler admits the provider
 only for this package version and the exact `src/qp.ch` source. A modified
 package body runs as ordinary Chelis code and reports provider unavailability.
@@ -12,12 +12,12 @@ package body runs as ordinary Chelis code and reports provider unavailability.
 Install the Reef package from its release, then add it to a project's manifest:
 
 ```sh
-chelis reef install --from-github Chelis-Lang/chelis-clarabel@v0.1.0
+chelis reef install --from-github Chelis-Lang/chelis-clarabel@v0.1.1
 ```
 
 ```toml
 [dependencies]
-chelis-clarabel = { version = "=0.1.0" }
+chelis-clarabel = { version = "=0.1.1" }
 ```
 
 The solver returns numerical approximations. A property may opt into
@@ -37,5 +37,5 @@ build/nonnegative/nonnegative
 ```
 
 The source package and release artifact pair are built with `chelis reef
-publish`. Release assets are `chelis-clarabel-0.1.0.tar.zst` and
-`chelis-clarabel-0.1.0.chb`; both belong to the same published package version.
+publish`. Release assets are `chelis-clarabel-0.1.1.tar.zst` and
+`chelis-clarabel-0.1.1.chb`; both belong to the same published package version.
