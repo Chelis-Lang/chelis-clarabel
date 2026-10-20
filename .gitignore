@@ -5,3 +5,4 @@ target/
 .venv/
 .*.reef-tmp-*
 .*.reef-backup-*
+.DS_Store
