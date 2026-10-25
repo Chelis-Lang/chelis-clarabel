@@ -1,0 +1,57 @@
+name: release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: write
+env:
+  CHELIS_TAG: v0.22.1
+  CHELIS_VERSION: 0.22.1
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v8.1.0
+      - name: Create the Python environment
+        run: |
+          uv venv --python 3.11
+          echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
+      - uses: ./.github/actions/install-chelis
+        with:
+          chelis-tag: ${{ env.CHELIS_TAG }}
+          chelis-version: ${{ env.CHELIS_VERSION }}
+          gh-token: ${{ secrets.CHELIS_RELEASE_TOKEN || github.token }}
+      - name: Read and validate the release identity
+        run: |
+          .venv/bin/python - <<'PYTHON'
+          import os, tomllib
+          from pathlib import Path
+          package = tomllib.loads(Path('reef.toml').read_text())['package']
+          version = package['version']
+          if os.environ['GITHUB_EVENT_NAME'] == 'push':
+              assert os.environ['GITHUB_REF_NAME'] == 'v' + version
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              output.write('PACKAGE_VERSION=' + version + '\n')
+          PYTHON
+      - name: Validate the solver and rejection cases
+        run: |
+          .venv/bin/python -m unittest discover -s scripts -p 'test_*.py'
+          .venv/bin/python scripts/check_package.py
+          chelis test tests_neg/ --expect neg
+      - name: Build and verify the package pair
+        run: |
+          chelis reef build --no-auto-fetch
+          chelis reef verify-artifact --shell "dist/chelis-clarabel-${PACKAGE_VERSION}.chb" --archive "dist/chelis-clarabel-${PACKAGE_VERSION}.tar.zst"
+      - name: Publish the release
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/chelis-clarabel-${{ env.PACKAGE_VERSION }}.chb
+            dist/chelis-clarabel-${{ env.PACKAGE_VERSION }}.tar.zst
+          generate_release_notes: true
+          fail_on_unmatched_files: true

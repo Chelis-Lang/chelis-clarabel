@@ -12,12 +12,12 @@ package body runs as ordinary Chelis code and reports provider unavailability.
 Install the Reef package from its release, then add it to a project's manifest:
 
 ```sh
-chelis reef install --from-github Chelis-Lang/chelis-clarabel@v0.1.1
+chelis reef install --from-github Chelis-Lang/chelis-clarabel@v0.1.2
 ```
 
 ```toml
 [dependencies]
-chelis-clarabel = { version = "=0.1.1" }
+chelis-clarabel = { version = "=0.1.2" }
 ```
 
 ## Solver contract
@@ -73,5 +73,5 @@ matrix passed to the `f64` solver, respectively.
 ## Package artifacts
 
 The source package and release artifact pair are built with `chelis reef
-publish`. Release assets are `chelis-clarabel-0.1.1.tar.zst` and
-`chelis-clarabel-0.1.1.chb`; both belong to the same published package version.
+publish`. Release assets are `chelis-clarabel-0.1.2.tar.zst` and
+`chelis-clarabel-0.1.2.chb`; both belong to the same published package version.

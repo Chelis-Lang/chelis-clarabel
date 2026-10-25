@@ -1,0 +1,44 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+env:
+  CHELIS_TAG: v0.22.1
+  CHELIS_VERSION: 0.22.1
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v8.1.0
+      - name: Create the Python environment
+        run: |
+          uv venv --python 3.11
+          echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
+      - uses: ./.github/actions/install-chelis
+        with:
+          chelis-tag: ${{ env.CHELIS_TAG }}
+          chelis-version: ${{ env.CHELIS_VERSION }}
+          gh-token: ${{ secrets.CHELIS_RELEASE_TOKEN || github.token }}
+      - name: Conformance and pin guards
+        run: |
+          chelis reef conform audit
+          chelis reef conform bump-check --base origin/main
+      - name: Checker controls
+        run: .venv/bin/python -m unittest discover -s scripts -p 'test_*.py'
+      - name: Formatting and lint
+        run: |
+          chelis fmt --check src/qp.ch
+          chelis lint --check .
+      - name: Negative tests
+        run: chelis test tests_neg/ --expect neg
+      - name: Solver execution and admission controls
+        run: .venv/bin/python scripts/check_package.py
+      - name: Build package
+        run: chelis reef build --no-auto-fetch

@@ -1,10 +1,13 @@
 schema = "3"
 [package]
 name = "chelis-clarabel"
-version = "0.1.1"
-compiler = "=0.21.0"
+version = "0.1.2"
+compiler = "=0.22.1"
 module_prefix = "Clarabel"
 resolver = "2"
 description = "Optional Clarabel conic QP solver for Chelis"
 license = "MIT"
 repository = "https://github.com/Chelis-Lang/chelis-clarabel"
+
+[conform]
+excluded_skills = ["backend-numerics", "cli-surface", "phase-gate", "spec-sync"]

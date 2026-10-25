@@ -1,0 +1,29 @@
+name: Install the published Chelis toolchain
+inputs:
+  chelis-tag:
+    required: true
+  chelis-version:
+    required: true
+  gh-token:
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Bootstrap chelisup
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.gh-token }}
+        CHELIS_TAG: ${{ inputs.chelis-tag }}
+      run: |
+        set -euo pipefail
+        gh release download "$CHELIS_TAG" --repo Chelis-Lang/chelis --pattern chelisup.sh --output - | sh
+        echo "$HOME/.chelis/bin" >> "$GITHUB_PATH"
+    - name: Install and verify the exact compiler
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.gh-token }}
+        CHELIS_VERSION: ${{ inputs.chelis-version }}
+      run: |
+        set -euo pipefail
+        chelisup install "$CHELIS_VERSION"
+        test "$(chelis --version)" = "chelis $CHELIS_VERSION"

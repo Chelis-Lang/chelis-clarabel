@@ -6,3 +6,8 @@ target/
 .*.reef-tmp-*
 .*.reef-backup-*
 .DS_Store
+
+# Local Python validation output.
+__pycache__/
+*.pyc
+.pytest_cache/
