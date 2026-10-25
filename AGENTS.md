@@ -5,7 +5,7 @@
 State this shell's intent (what users can ultimately do with it) and link a
 vision doc. A deliverables checklist is not an intent statement.
 
-<!-- BEGIN CHELIS MANAGED BLOCK: agents-inheritance chelis@0.22.0 (sha256:f0facf61d9caf2f9) -->
+<!-- BEGIN CHELIS MANAGED BLOCK: agents-inheritance chelis@0.22.1 (sha256:c56bb9ac6e9f36af) -->
 # Chelis Agent Contract
 
 Keep this file concise and relevant to every agent working in this repository.
@@ -106,7 +106,7 @@ function of those inputs, and feedback that varies between identical runs is a d
 
 ## Subagents
 
-[`docs/investigations/agent_contract_rationale.md`](https://github.com/Chelis-Lang/chelis/blob/v0.22.0/docs/investigations/agent_contract_rationale.md)
+[`docs/investigations/agent_contract_rationale.md`](https://github.com/Chelis-Lang/chelis/blob/v0.22.1/docs/investigations/agent_contract_rationale.md)
 holds the measurements behind these rules.
 
 - Every subagent prompt names the delivery mechanism and the complete expected report.

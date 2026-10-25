@@ -7,8 +7,8 @@ on:
 permissions:
   contents: read
 env:
-  CHELIS_TAG: v0.22.0
-  CHELIS_VERSION: 0.22.0
+  CHELIS_TAG: v0.22.1
+  CHELIS_VERSION: 0.22.1
 jobs:
   gate:
     runs-on: ubuntu-latest
