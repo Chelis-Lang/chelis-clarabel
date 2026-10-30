@@ -5,7 +5,7 @@
 State this shell's intent (what users can ultimately do with it) and link a
 vision doc. A deliverables checklist is not an intent statement.
 
-<!-- BEGIN CHELIS MANAGED BLOCK: agents-inheritance chelis@0.22.1 (sha256:c56bb9ac6e9f36af) -->
+<!-- BEGIN CHELIS MANAGED BLOCK: agents-inheritance chelis@0.23.0 (sha256:e69435e59084e2af) -->
 # Chelis Agent Contract
 
 Keep this file concise and relevant to every agent working in this repository.
@@ -106,7 +106,7 @@ function of those inputs, and feedback that varies between identical runs is a d
 
 ## Subagents
 
-[`docs/investigations/agent_contract_rationale.md`](https://github.com/Chelis-Lang/chelis/blob/v0.22.1/docs/investigations/agent_contract_rationale.md)
+[`docs/investigations/agent_contract_rationale.md`](https://github.com/Chelis-Lang/chelis/blob/v0.23.0/docs/investigations/agent_contract_rationale.md)
 holds the measurements behind these rules.
 
 - Every subagent prompt names the delivery mechanism and the complete expected report.
@@ -130,11 +130,8 @@ holds the measurements behind these rules.
   here, not a certified safe width, and it is a separate budget from the CPU one above.
 - Every spawn names its model tier and says in one clause why that tier fits: the
   expensive tier for judgement whose errors are costly to detect, the cheap tier for
-  mechanical work such as waiting on CI, polling, or transcribing a result. The
-  orchestrator states its own context size in the message that announces a spawn.
-- Every brief states a numeric report-length budget, and a numeric context budget except
-  for red-team rounds. An agent that will exceed its context budget says so and returns
-  what it has.
+  mechanical work such as waiting on CI, polling, or transcribing a result.
+- Every brief states a numeric report-length budget.
 - A brief says which facts the orchestrator has already verified, against what head, and
   that the agent must not re-derive them, and it names what the agent still has to
   establish itself.
