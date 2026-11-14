@@ -4,20 +4,27 @@
 `P`, `q`, `A`, `b`, a cone list, and explicit settings, then returns either
 `Solved` with primal, dual, slack, and diagnostics or `Stopped` with a status.
 
-The compiler pin in [`reef.toml`](reef.toml) selects the toolchain. Its evaluator
-and compiled C paths use the native provider carried by that toolchain. The compiler admits the provider
-only for this package version and the exact `src/qp.ch` source. A modified
-package body runs as ordinary Chelis code and reports provider unavailability.
+The compiler pin in [`reef.toml`](reef.toml) selects Chelis 0.23.1.
+
+Its evaluator and compiled C paths use the native provider for
+`chelis-clarabel` version `0.1.4` and the exact [`src/qp.ch`](src/qp.ch) source.
+
+The source SHA-256 is `dbb1d56ad68458785a7c20bf558dce0136d85ac13d9140fc1fe9d9ab00a1142a`.
+
+This source matches `packages/chelis-clarabel/src/qp.ch` in the compiler source.
+
+A different package version cannot use this provider.
+A modified package body executes as ordinary Chelis code and reports provider unavailability.
 
 Install the Reef package from its release, then add it to a project's manifest:
 
 ```sh
-chelis reef install --from-github Chelis-Lang/chelis-clarabel@v0.1.3
+chelis reef install --from-github Chelis-Lang/chelis-clarabel@v0.1.4
 ```
 
 ```toml
 [dependencies]
-chelis-clarabel = { version = "=0.1.3" }
+chelis-clarabel = { version = "=0.1.4" }
 ```
 
 ## Solver contract
@@ -73,5 +80,5 @@ matrix passed to the `f64` solver, respectively.
 ## Package artifacts
 
 The source package and release artifact pair are built with `chelis reef
-publish`. Release assets are `chelis-clarabel-0.1.3.tar.zst` and
-`chelis-clarabel-0.1.3.chb`; both belong to the same published package version.
+publish`. Release assets are `chelis-clarabel-0.1.4.tar.zst` and
+`chelis-clarabel-0.1.4.chb`. Both belong to the same published package version.
