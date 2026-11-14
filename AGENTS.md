@@ -5,7 +5,7 @@
 State this shell's intent (what users can ultimately do with it) and link a
 vision doc. A deliverables checklist is not an intent statement.
 
-<!-- BEGIN CHELIS MANAGED BLOCK: agents-inheritance chelis@0.23.0 (sha256:e69435e59084e2af) -->
+<!-- BEGIN CHELIS MANAGED BLOCK: agents-inheritance chelis@0.23.1 (sha256:4e166176b5f153aa) -->
 # Chelis Agent Contract
 
 Keep this file concise and relevant to every agent working in this repository.
@@ -106,7 +106,7 @@ function of those inputs, and feedback that varies between identical runs is a d
 
 ## Subagents
 
-[`docs/investigations/agent_contract_rationale.md`](https://github.com/Chelis-Lang/chelis/blob/v0.23.0/docs/investigations/agent_contract_rationale.md)
+[`docs/investigations/agent_contract_rationale.md`](https://github.com/Chelis-Lang/chelis/blob/v0.23.1/docs/investigations/agent_contract_rationale.md)
 holds the measurements behind these rules.
 
 - Every subagent prompt names the delivery mechanism and the complete expected report.
@@ -226,9 +226,15 @@ changes land upstream first (`Chelis-Lang/chelis`) and propagate here via
 
 ## Package validation and release
 
-This package uses the exact native-provider identity carried by its compiler.
-Preserve `src/qp.ch` when changing only packaging. Use published compiler assets;
-never rebuild a compiler inside this shell or weaken provider admission.
+Chelis 0.23.1 admits the native provider for `chelis-clarabel` version `0.1.4`
+and the exact `src/qp.ch` source.
+
+The source SHA-256 is `dbb1d56ad68458785a7c20bf558dce0136d85ac13d9140fc1fe9d9ab00a1142a`.
+
+The source must match `packages/chelis-clarabel/src/qp.ch` in the compiler source.
+
+Preserve `src/qp.ch` for package metadata changes. Use published compiler assets.
+Never rebuild a compiler inside this shell or weaken provider admission.
 
 Every PR receives a fresh local review through `agent-skills/redteam-exec/SKILL.md`.
 Hand over a clean exact head and idle worktree; keep its reviewer through repair
